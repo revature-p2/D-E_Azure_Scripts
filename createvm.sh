@@ -4,7 +4,7 @@ username=$1
 network=$2
 
 vnetcheck=$(az network vnet list -g $username --query [].id | grep -E /subscriptions/815e9f4d-e856-497c-8a3d-b2403a7b89e7/resourceGroups/$username/providers/Microsoft.Network/virtualNetworks/$network
-if [ -z vnetcheck ]; then
+if [ -z $vnetcheck ]; then
 echo No network found. Please configure one блядь.
 exit 1
 fi
