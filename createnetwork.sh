@@ -1,5 +1,7 @@
 #!/bin/bash
 
+username=$1
+
 az network nsg create --name nsg_public -g $username
 
 az network nsg create --name nsg_private -g $username
