@@ -43,18 +43,8 @@ echo "no user"
 exit 1
 fi
 
-###we can just have dropdowns that will force these to be the options
-if [ $role != "reader" ] && [ $role != "contributor" ]; then
-echo "cannot assign"
-exit 1
-fi
 
-if [ $action != "create" ] && [ $action != "delete" ]; then
-echo "cannot do action"
-exit 1
-fi
 
-#####
 
 if [ -n "$userCheck" ]; then
 az role assignment $action --role $role --assignee $upn
