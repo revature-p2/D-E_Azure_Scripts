@@ -9,8 +9,8 @@ password=$6
 
 
 vnetcheck=$(az network vnet list -g $username --query [].id | grep -E /subscriptions/815e9f4d-e856-497c-8a3d-b2403a7b89e7/resourceGroups/$username/providers/Microsoft.Network/virtualNetworks/$network
-if [ -z $vnetcheck ]; then
-echo No network found. Please configure one блядь.
+if [ -n $vnetcheck ]; then
+echo "$network already exists"
 exit 1
 fi
 
@@ -19,6 +19,7 @@ if [ -n $vmcheck]; then
 echo "$vmname already exists"
 exit 1
 fi
+
 
 ## az vm list -g yoyo -d --query [].publicIps
 
