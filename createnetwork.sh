@@ -3,8 +3,7 @@
 username=$1
 vnetName=$2
 vnetIP=$3
-vnetMask=$4
-privateSubnet=$5
+privateSubnet=$4
 privateIP=$6
 publicSubnet=$7
 publicIP=$8
