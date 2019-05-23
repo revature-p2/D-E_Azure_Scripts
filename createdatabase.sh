@@ -1,17 +1,25 @@
 #!/bin/bash
 
-case $1 in
+username=$1
+server=$2
+user=$3
+password=$4
+SQLdatabase=$5
 
-nonrelational)
+result=$(az sql server list --query [].name | grep -E $server) # since sqlserver is static
+result2=$(az sql db list --server EricDavidsqlserver -g $username --query [].name | grep -E $SQLdatabase)
 
-az cosmosdb create --name cosmos -g $username
-az cosmosdb database create --db-name $databaseName --name cosmos -g $username
-az cosmosdb collection create --collection-name $collection -g $username --db-name $databaseName --name cosmos
-;;
+if [ -n "$result" ]; then
+    echo "$server exists"
+    exit 1
+fi
 
-relational)
+# name of server will be all lowercase
+if [ -n "$result2" ]; then
+    echo "$SQLdatabase exists"
+    exit 1
+fi
 
-az sql server create --location southcentralus -g $username --name sqlserver --admin-user $username --admin-password $password
-az sql db create --group $username --server sqlserver --name $database --max-size 10GB
-
-esac
+az sql server create --location southcentralus -g $username --name $server \
+ --admin-user $user --admin-password $password
+az sql db create -g $username --server EricDavidsqlserver --name $SQLdatabase --max-size 10GB
