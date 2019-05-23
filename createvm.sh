@@ -14,9 +14,14 @@ echo No network found. Please configure one блядь.
 exit 1
 fi
 
+vmcheck=$(az vm list -g $username --query [].name | grep -E $vmname)
+if [ -n $vmcheck]; then
+echo "$vmname already exists"
+exit 1
+fi
 
+## az vm list -g yoyo -d --query [].publicIps
 
-if ! [$vmname]; then
 az vm create --name $vmname --resource-group $username --image UbuntuLTS --location southcentralus --size B1s --admin-username $user \
 --admin-password $password --vnet-name $network --subnet $vmsubnet --no-wait
 echo Creating your Virtual Machine
