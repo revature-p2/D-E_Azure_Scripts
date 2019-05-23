@@ -26,34 +26,6 @@ fi
 
 }
 
-#### assign roles ####
-
-assign(){
-
-theuser=$1
-action=$2
-role=$3
-
-userCheck=$(az ad user list --query [].userPrincipalName | grep -E /$upn/)
-
-## make/remove role
-
-if [ -z "$userCheck" ]; then
-echo "no user"
-exit 1
-fi
-
-
-
-
-if [ -n "$userCheck" ]; then
-az role assignment $action --role $role --assignee $upn
-echo "changed role"
-fi
-
-}
-
-
 #### delete user ####
 deleteUser(){
 
