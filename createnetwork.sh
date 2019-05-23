@@ -9,6 +9,9 @@ privateIP=$6
 publicSubnet=$7
 publicIP=$8
 
+## conditional for vnet name
+## validation to check if subnet isnt larger than vnet
+
 az network nsg create --name nsg_public -g $username
 
 az network nsg create --name nsg_private -g $username
