@@ -7,7 +7,7 @@ az network nsg create --name nsg_public -g $username
 az network nsg create --name nsg_private -g $username
 
 az network nsg rule create --name in_rule --nsg-name nsg_public -g $username --priority 100 --direction inbound --source-address-prefixes 0.0.0.0/1 \
---source-port-ranges 22 80 443 --destination-address-prefixes 100.0.0.0/26 --destination-port-ranges 22 80 443 --protocol '*' 
+--source-port-ranges 22 80 443 --destination-address-prefixes 100.0.0.0/25 --destination-port-ranges 22 80 443 --protocol '*' 
 
 
 az network nsg rule create --name out_rule --nsg-name nsg_public -g $username --priority 100 --direction outbound --source-address-prefixes 100.0.0.0/25 \
