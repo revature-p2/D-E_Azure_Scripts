@@ -8,9 +8,9 @@ user=$5
 password=$6
 
 
-vnetcheck=$(az network vnet list -g $username --query [].id | grep -E /subscriptions/815e9f4d-e856-497c-8a3d-b2403a7b89e7/resourceGroups/$username/providers/Microsoft.Network/virtualNetworks/$network
-if [ -n $vnetcheck ]; then
-echo "$network already exists"
+vnetcheck=$(az network vnet list -g $username --query [].name | grep -E $network)
+if [ -z $vnetcheck ]; then
+echo "$network doesn't exists"
 exit 1
 fi
 
