@@ -7,6 +7,7 @@ privateSubnet=$3
 privateIP=$4
 publicSubnet=$5
 publicIP=$6
+#numberofsubnets=$7
 
 ## conditional for vnet name
 vnetcheck=$(az network vnet list -g $username --query [].name | grep -E $vnetName)
@@ -34,6 +35,38 @@ fi
 #exit 1
 #fi
 
+
+################################## Ashish logic trials
+
+#mask=$(vnetIP | grep ..$)
+#index=0
+#for i in {2..2^(32-$mask)..*2}
+#do
+#index+=1
+#cot=false
+#if [ i=$numberofsubnets ]; then
+#cot=true
+#submask=$mask+$index
+#break
+#fi
+#done
+
+#if $cot=false; then
+#echo invalid subnet request
+#exit 1
+#fi
+
+#for L in {1..$numberofsubnets..1}
+#do
+#if [ $L%2==0 ]; then
+#az network vnet subnet create --address-prefixes $publicIP --vnet-name $vnetName -n $publicSubnet -g $username --network-security-group nsg_public
+#else
+#az network vnet subnet create --address-prefixes $privateIP --vnet-name $vnetName -n $privateSubnet -g $username --network-security-group nsg_private
+#fi
+
+
+
+##################################
 az network nsg create --name nsg_public -g $username
 
 az network nsg create --name nsg_private -g $username
