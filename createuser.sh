@@ -9,7 +9,7 @@ newuser=$1
 sub=$2
 pass='SupidPassword1234@#'
 
-result=$(az ad user list --query [].userPrincipalName | grep -E /$upn/)
+result=$(az ad user list --query [].userPrincipalName | grep -E $upn)
 
 ## checks if user already exists
 if [ -n "$result" ]; then
@@ -31,7 +31,7 @@ deleteUser(){
 
 theuser=$1
 
-userCheck=$(az ad user list --query [].userPrincipalName | grep -E /$upn/)
+userCheck=$(az ad user list --query [].userPrincipalName | grep -E $upn)
 adminCheck=$(az role assignment list --include-classic-administrators --query "[?id=='NA(classic admins)'].principalName" | grep -E /$theuser/)
 
 ## if no user is there then it exits
