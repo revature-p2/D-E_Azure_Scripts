@@ -30,13 +30,13 @@ adminCheck=$(az role assignment list --include-classic-administrators --query "[
 ## if no user is there then it exits
 if [ -z "$userCheck" ]; then
 echo "no user available to delete"
-exit 1
+exit 0
 fi
 
 ## do not delete an admin!
 if [ -n "$adminCheck" ]; then
 echo "please do not delete yourself"
-exit 1
+exit 0
 fi
 
 ## if user exists then remove them
@@ -63,3 +63,4 @@ theuser=$2
 DOMAIN='ashuraazuregmail.onmicrosoft.com'
 upn=$theuser@$DOMAIN
 $command
+
