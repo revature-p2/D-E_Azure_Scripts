@@ -7,7 +7,7 @@ password=$4
 SQLdatabase=$5
 
 result=$(az sql server list --query [].name | grep -E $server) # since sqlserver is static
-result2=$(az sql db list --server EricDavidsqlserver -g $username --query [].name | grep -E $SQLdatabase)
+result2=$(az sql db list --server $server -g $username --query [].name | grep -E $SQLdatabase)
 
 if [ -n "$result" ]; then
     echo "$server exists"
@@ -22,4 +22,4 @@ fi
 
 az sql server create --location southcentralus -g $username --name $server \
  --admin-user $user --admin-password $password
-az sql db create -g $username --server EricDavidsqlserver --name $SQLdatabase --max-size 10GB
+az sql db create -g $username --server $server --name $SQLdatabase --max-size 10GB
