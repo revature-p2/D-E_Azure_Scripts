@@ -13,20 +13,20 @@ publicIP=$6
 vnetcheck=$(az network vnet list -g $username --query [].name | grep -E $vnetName)
 if ! [ -z $vnetcheck ]; then
 echo "$vnetName already exists"
-exit 1
+exit 0
 fi
 
 ## conditional for subnet names
 privatecheck=$(az network vnet list -g $username --query [].subnets[].name | grep -E $privateSubnet)
 if ! [ -z $privatecheck ]; then
 echo "$privateSubnet already exists"
-exit 1
+exit 0
 fi
 
 publiccheck=$(az network vnet list -g $username --query [].subnets[].name | grep -E $publicSubnet)
 if ! [ -z $privatecheck ]; then
 echo "$privateSubnet already exists"
-exit 1
+exit 0
 fi
 
 ## validation to check if subnet isnt larger than vnet (currently psuedo code)
