@@ -1,12 +1,7 @@
 #!/bin/bash
 
-DOMAIN='ashuraazuregmail.onmicrosoft.com'
-upn=$newuser@$DOMAIN
+create() {
 
-createUser() {
-
-newuser=$1
-sub=$2
 pass='SupidPassword1234@#'
 
 result=$(az ad user list --query [].userPrincipalName | grep -E $upn)
@@ -19,7 +14,7 @@ fi
 
 ## if user doesn't exist then create one
 if [ -z "$result" ]; then
-az ad user create --display-name $newuser --password $pass --user-principal-name $upn --force-change-password-next-login --subscription $sub
+az ad user create --display-name $theuser --password $pass --user-principal-name $upn --force-change-password-next-login --subscription Revature
 echo "user born"
 echo "your temporary password is $pass"
 fi
@@ -27,12 +22,10 @@ fi
 }
 
 #### delete user ####
-deleteUser(){
-
-theuser=$1
+delete(){
 
 userCheck=$(az ad user list --query [].userPrincipalName | grep -E $upn)
-adminCheck=$(az role assignment list --include-classic-administrators --query "[?id=='NA(classic admins)'].principalName" | grep -E /$theuser/)
+adminCheck=$(az role assignment list --include-classic-administrators --query "[?id=='NA(classic admins)'].principalName" | grep -E $theuser)
 
 ## if no user is there then it exits
 if [ -z "$userCheck" ]; then
@@ -54,17 +47,19 @@ fi
 
 }
 
-user=$1
 
 ##check if admin
 
-admin=$(az role assignment list --include-classic-administrators --query "[?id=='NA(classic admins)'].principalName" | grep -E /$user/)
+#admin=$(az role assignment list --include-classic-administrators --query "[?id=='NA(classic admins)'].principalName" | grep -E $theuser)
 
-if [ -z "$admin" ]; then
-echo "not an admin, so go away"
-exit 1
-fi
+#if [ -z "$admin" ]; then
+#echo "not an admin, so go away"
+#exit 1
+##fi
 
 ## can now write in functions along with their parameters ##
-command=$2
-$command $3 $4 $5
+command=$1
+theuser=$2
+DOMAIN='ashuraazuregmail.onmicrosoft.com'
+upn=$theuser@$DOMAIN
+$command
