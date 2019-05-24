@@ -1,38 +1,38 @@
 #!/bin/bash
 
-username=$1
-vnetName=$2
-vnetIP=$3
-privateSubnet=$4
-privateIP=$6
-publicSubnet=$7
-publicIP=$8
+username=yoyo
+vnetName=$1
+vnetIP=$2
+privateSubnet=$3
+privateIP=$4
+publicSubnet=$5
+publicIP=$6
 
 ## conditional for vnet name
 vnetcheck=$(az network vnet list -g $username --query [].name | grep -E $vnetName)
-if [ -n $vnetcheck ]; then
+if ! [ -z $vnetcheck ]; then
 echo "$vnetName already exists"
 exit 1
 fi
 
 ## conditional for subnet names
 privatecheck=$(az network vnet list -g $username --query [].subnets[].name | grep -E $privateSubnet)
-if [ -n $privatecheck ]; then
+if ! [ -z $privatecheck ]; then
 echo "$privateSubnet already exists"
 exit 1
 fi
 
 publiccheck=$(az network vnet list -g $username --query [].subnets[].name | grep -E $publicSubnet)
-if [ -n $privatecheck ]; then
+if ! [ -z $privatecheck ]; then
 echo "$privateSubnet already exists"
 exit 1
 fi
 
 ## validation to check if subnet isnt larger than vnet (currently psuedo code)
-if [ $privateIP > $vnetIP ] && [ $publicIP > $vnetIP ]; then
-echo "subnets need to be smaller than the network"
-exit 1
-fi
+#if [ $privateIP > $vnetIP ] && [ $publicIP > $vnetIP ]; then
+#echo "subnets need to be smaller than the network"
+#exit 1
+#fi
 
 az network nsg create --name nsg_public -g $username
 
