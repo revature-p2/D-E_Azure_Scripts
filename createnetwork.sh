@@ -40,28 +40,30 @@ fi
 
 #mask=$(vnetIP | grep ..$)
 #index=0
-#for i in {2..2^(32-$mask)..*2}
-#do
-#index+=1
+#max=2^(32-$mask)
+#i=1
+#while [ $i<=$max ]; do
+#$i=$i*2
 #cot=false
-#if [ i=$numberofsubnets ]; then
+#if [ $i=$numberofsubnets ]; then
 #cot=true
 #submask=$mask+$index
 #break
 #fi
+#$index+=1
 #done
 
 #if $cot=false; then
 #echo invalid subnet request
-#exit 1
+#exit 0
 #fi
 
-#for L in {1..$numberofsubnets..1}
+#for L in {1..$numberofsubnets..1};
 #do
 #if [ $L%2==0 ]; then
-#az network vnet subnet create --address-prefixes $publicIP --vnet-name $vnetName -n $publicSubnet -g $username --network-security-group nsg_public
+#az network vnet subnet create --address-prefixes $publicIP --vnet-name $vnetName -n Public-Subnet+$L -g $username --network-security-group nsg_public
 #else
-#az network vnet subnet create --address-prefixes $privateIP --vnet-name $vnetName -n $privateSubnet -g $username --network-security-group nsg_private
+#az network vnet subnet create --address-prefixes $privateIP --vnet-name $vnetName -n Private-Subnet + $L -g $username --network-security-group nsg_private
 #fi
 
 
