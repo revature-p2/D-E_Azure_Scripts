@@ -1,13 +1,13 @@
 #!/bin/bash
 
-username=yoyo
-vnetName=$1
-vnetIP=$2
-privateSubnet=$3
-privateIP=$4
-publicSubnet=$5
-publicIP=$6
-#numberofsubnets=$7
+username=$1
+vnetName=$2
+vnetIP=$3
+privateSubnet=$4
+privateIP=$5
+publicSubnet=$6
+publicIP=$7
+#numberofsubnets=$8
 
 ## conditional for vnet name
 vnetcheck=$(az network vnet list -g $username --query [].name | grep -E $vnetName)
