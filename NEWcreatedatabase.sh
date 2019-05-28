@@ -1,9 +1,9 @@
 #!/bin/bash
 
-username=yoyo
-cosmos=$1 # name of database account
-databaseName=$2 # name of database
-collection=$3 # database collection name
+username=$1
+cosmos=$2 # name of database account
+databaseName=$3 # name of database
+collection=$4 # database collection name
 
 result1=$(az cosmosdb list --query [].name | grep -E $cosmos) # database account
 
