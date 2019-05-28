@@ -1,10 +1,10 @@
 #!/bin/bash
 
-username=yoyo
-server=$1
-user=$2
-password=$3
-SQLdatabase=$4
+username=$1
+server=$2
+user=$3
+password=$4
+SQLdatabase=$5
 
 result=$(az sql server list -g $username --query [].name | grep -E $server)
 
