@@ -1,11 +1,11 @@
 #!/bin/bash
 
-username=yoyo
-vmname=$1
-network=$2
-vmsubnet=$3
-user=$4
-password=$5
+username=$1
+vmname=$2
+network=$3
+vmsubnet=$4
+user=$5
+password=$6
 
 
 vnetcheck=$(az network vnet list -g $username --query [].name | grep -E $network)
