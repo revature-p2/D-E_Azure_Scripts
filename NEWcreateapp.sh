@@ -1,8 +1,8 @@
 #!/bin/bash
 
-username=yoyo
-application=$1
-gitrepo=$2
+username=$1
+application=$2
+gitrepo=$3
 
 
 # resource group is the same as their sign on name.
