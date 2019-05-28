@@ -1,8 +1,8 @@
 #!/bin/bash
 
-username=yoyo
-storagename=$1
-container=$2
+username=$1
+storagename=$2
+container=$3
 
 
 storagecheck=$(az storage account list -g $username --query [].name | grep -E $storagename)
