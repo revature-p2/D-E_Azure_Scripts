@@ -41,9 +41,9 @@ Main Aspects:
 
 		Used the node API child-process as a way to "spawn" commands to the terminal and run them. 
 	
-		A GET request is utalized to interact with the HTML forms 
+		A GET request is utilized to interact with the HTML forms 
 	
-		Request queries of inputs in those forms are used to act as arguments in the scripts "spawned" onto the terminal command line
+		Request queries of inputs in those forms are used to act as arguments in the scripts "spawned" onto the terminal command 		 line
 	
 		The forms are run upon a submit on the client side
 	
